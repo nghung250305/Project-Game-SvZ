@@ -282,7 +282,7 @@ while running:
             game_started = False  # Quay lại màn hình menu chính
         
         clock = pygame.time.Clock()
-        clock.tick(90)  # FPS = 90
+        clock.tick(120)  # FPS = 90
         pygame.display.update()  # Cập nhật màn hình game
 
         # Tăng số frame để sử dụng cho animation
