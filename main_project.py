@@ -2,7 +2,7 @@ import pygame
 from pygame import mixer
 import random
 import math
-import time  # Thêm thư viện time để xử lý thời gian chờ
+import time  
 
 # Khởi tạo Pygame
 pygame.init()
@@ -11,28 +11,36 @@ pygame.init()
 screen = pygame.display.set_mode((900, 600))
 
 # Tải hình nền cho giao diện menu
-menu_background = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/menu_background.jpg")
+menu_background = pygame.image.load("assets/images/menu_background.jpg")
 menu_background = pygame.transform.scale(menu_background, (900, 600))
 
 # Tải hình nền cho game
-game_background = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/background.jpg")
+game_background = pygame.image.load("assets/images/background.jpg")
 game_background = pygame.transform.scale(game_background, (900, 600))
 
+# Tải hình nền cho từng cấp độ
+background_easy = pygame.image.load('assets/images/background_easy.jpg')
+background_easy = pygame.transform.scale(background_easy, (900, 600))
+background_medium = pygame.image.load('assets/images/background_medium.png')
+background_medium = pygame.transform.scale(background_medium, (900, 600))
+background_hard = pygame.image.load('assets/images/background_hard.jpg')
+background_hard = pygame.transform.scale(background_hard, (900, 600))
+
 # Tải hình ảnh các nút trên menu
-start_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/start_button.png")
+start_button_img = pygame.image.load("assets/images/start_button.png")
 start_button_img = pygame.transform.scale(start_button_img, (200, 60))
 
-shop_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/shop_button.png")
+shop_button_img = pygame.image.load("assets/images/shop_button.png")
 shop_button_img = pygame.transform.scale(shop_button_img, (200, 60))
 
-setting_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/setting_button.png")
+setting_button_img = pygame.image.load("assets/images/setting_button.png")
 setting_button_img = pygame.transform.scale(setting_button_img, (200, 60))
 
-quit_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/quit_button.png")
+quit_button_img = pygame.image.load("assets/images/quit_button.png")
 quit_button_img = pygame.transform.scale(quit_button_img, (200, 60))
 
 # Tải hình ảnh cho biểu tượng mạng của người chơi
-life_image = pygame.image.load('C:/Users/Admin/Documents/My game project/assets/images/life.png')  
+life_image = pygame.image.load('assets/images/life.png')  
 life_image = pygame.transform.scale(life_image, (40, 40))  
 
 # Tạo các nút cho menu
@@ -41,13 +49,13 @@ setting_button_rect = setting_button_img.get_rect(center=(300, 420))
 quit_button_rect = quit_button_img.get_rect(center=(600, 420))  
 
 # Tải hình ảnh nút cho các cấp độ
-easy_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/easy_button.png")
+easy_button_img = pygame.image.load("assets/images/easy_button.png")
 easy_button_img = pygame.transform.scale(easy_button_img, (200, 60))
 
-medium_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/medium_button.png")
+medium_button_img = pygame.image.load("assets/images/medium_button.png")
 medium_button_img = pygame.transform.scale(medium_button_img, (200, 60))
 
-hard_button_img = pygame.image.load("C:/Users/Admin/Documents/My game project/assets/images/hard_button.png")
+hard_button_img = pygame.image.load("assets/images/hard_button.png")
 hard_button_img = pygame.transform.scale(hard_button_img, (200, 60))
 
 # Tạo các nút cho chọn cấp độ
@@ -56,34 +64,34 @@ medium_button_rect = medium_button_img.get_rect(center=(450, 360))
 hard_button_rect = hard_button_img.get_rect(center=(450, 420))
 
 # Tải nhạc nền cho trò chơi
-mixer.music.load("C:/Users/Admin/Documents/My game project/assets/sounds/background.wav")
+mixer.music.load("assets/sounds/background.wav")
 mixer.music.play(-1)  
 
 # Tiếng súng
-laser_sound = mixer.Sound("C:/Users/Admin/Documents/My game project/assets/sounds/laser.wav")
+laser_sound = mixer.Sound("assets/sounds/laser.wav")
 
 # Thiết lập tiêu đề và biểu tượng của trò chơi
 pygame.display.set_caption("Soldier vs Zombie")
 
-icon = pygame.image.load('C:/Users/Admin/Documents/My game project/assets/images/enemy.png')
+icon = pygame.image.load('assets/images/logo.jpg')
 pygame.display.set_icon(icon)
 
 # Người chơi
-playerImg = pygame.image.load('C:/Users/Admin/Documents/My game project/assets/images/player.png')
+playerImg = pygame.image.load('assets/images/player.png')
 playerImg = pygame.transform.scale(playerImg, (70, 70))  
 playerX = 836  # Vị trí ban đầu của người chơi theo trục X
 playerY = 300  # Vị trí ban đầu của người chơi theo trục Y
 playerX_change = 0  # Biến thay đổi vị trí theo trục X
 playerY_change = 0  # Biến thay đổi vị trí theo trục Y
 
-player_base_img = pygame.image.load('C:/Users/Admin/Documents/My game project/assets/images/base_image.png')  
+player_base_img = pygame.image.load('assets/images/base_image.png')  
 player_base_img = pygame.transform.scale(player_base_img, (70, 70))  
 
 # Kẻ thù
-enemy_idle = [pygame.image.load(f'C:/Users/Admin/Documents/My game project/assets/images/idle/enemy_idle_{i}.png') for i in range(1, 16)]
-enemy_walk = [pygame.image.load(f'C:/Users/Admin/Documents/My game project/assets/images/walk/enemy_walk_{i}.png') for i in range(1, 11)]
-enemy_attack = [pygame.image.load(f'C:/Users/Admin/Documents/My game project/assets/images/attack/enemy_attack_{i}.png') for i in range(1, 9)]
-enemy_dead = [pygame.image.load(f'C:/Users/Admin/Documents/My game project/assets/images/dead/enemy_dead_{i}.png') for i in range(1, 13)]
+enemy_idle = [pygame.image.load(f'assets/images/idle/enemy_idle_{i}.png') for i in range(1, 16)]
+enemy_walk = [pygame.image.load(f'assets/images/walk/enemy_walk_{i}.png') for i in range(1, 11)]
+enemy_attack = [pygame.image.load(f'assets/images/attack/enemy_attack_{i}.png') for i in range(1, 9)]
+enemy_dead = [pygame.image.load(f'assets/images/dead/enemy_dead_{i}.png') for i in range(1, 13)]
 
 # Thay đổi kích thước hình ảnh kẻ thù
 enemy_idle = [pygame.transform.scale(img, (64, 64)) for img in enemy_idle]
@@ -92,7 +100,7 @@ enemy_attack = [pygame.transform.scale(img, (64, 64)) for img in enemy_attack]
 enemy_dead = [pygame.transform.scale(img, (64, 64)) for img in enemy_dead]
 
 # Load boss idle animation frames
-boss_idle = [pygame.image.load(f'C:/Users/Admin/Documents/My game project/assets/images/boss_idle/boss_idle_{i}.png') for i in range(1, 6)]
+boss_idle = [pygame.image.load(f'assets/images/boss_idle/boss_idle_{i}.png') for i in range(1, 6)]
 boss_idle = [pygame.transform.scale(img, (128, 128)) for img in boss_idle]  # Tùy chỉnh kích thước boss
 
 # Khởi tạo các giá trị kẻ thù
@@ -107,22 +115,22 @@ enemy_state = ["idle" for _ in range(num_of_enemies)]
 enemy_dead_frame = [0 for _ in range(num_of_enemies)]  
 
 # Đạn
-bulletImg = pygame.image.load('C:/Users/Admin/Documents/My game project/assets/images/bullet.png')
+bulletImg = pygame.image.load('assets/images/bullet.png')
 bulletImg = pygame.transform.scale(bulletImg, (30, 20))  
 bulletX = 0  
 bulletY = 300  
-bulletX_change = -20  
+bulletX_change = -30  
 bullet_state = "ready"  # Trạng thái của đạn, "ready" nghĩa là đạn chưa được bắn
 
 # Điểm số
 score_value = 0  
-font = pygame.font.Font('C:/Users/Admin/Documents/My game project/timesnewroman.ttf', 32)
+font = pygame.font.Font('timesnewroman.ttf', 32)
 
 textX = 10  # Vị trí hiển thị điểm số theo trục X
 testY = 10  # Vị trí hiển thị điểm số theo trục Y
 
 # Thông báo khi kết thúc trò chơi
-over_font = pygame.font.Font('C:/Users/Admin/Documents/My game project/timesnewroman.ttf', 64)
+over_font = pygame.font.Font('timesnewroman.ttf', 64)
 
 level = "Easy"  # Cấp độ ban đầu
 
@@ -131,17 +139,16 @@ zombies_passed = 0
 player_lives = 5  # Nhân vật có 5 mạng ban đầu
 
 # Boss variables
-bossX = 400  # Tọa độ X của boss
-bossY = 300  # Tọa độ Y của boss
-boss_health = 15  # Lượng máu của boss
+bossX = 0 
+bossY = 236  
+boss_health = 10  # Lượng máu của boss
 boss_active = False  # Boss chưa xuất hiện
 boss_state = "idle"  # Trạng thái ban đầu là idle
 
 # Biến theo dõi số lần đạn trúng boss
 bullet_hit_count = 0  # Số đạn đã trúng boss
 
-# Biến xác định xem boss có xuất hiện hay không
-boss_active = False
+boss_speed = 0.5  # Đặt tốc độ di chuyển của boss
 
 # Hàm hiển thị số mạng của người chơi
 def show_lives(x, y, lives):
@@ -158,11 +165,20 @@ def game_over_text():
     over_text = over_font.render("Game Over", True, (0, 0, 0))  
     screen.blit(over_text, (300, 250))  
 
-
+# Hàm chọn background theo level
+def draw_background(level):
+    if level == "Easy":
+        screen.blit(background_easy, (0, 0))
+    elif level == "Medium":
+        screen.blit(background_medium, (0, 0))
+    elif level == "Hard":
+        screen.blit(background_hard, (0, 0)) 
+        
+# Hàm hiển thị level
 def show_level(x, y):
-    font = pygame.font.Font("C:/Users/Admin/Documents/My game project/timesnewroman.ttf", 30)  # Kích thước font là 48
+    font = pygame.font.Font("timesnewroman.ttf", 30)  # Kích thước font là 48
     level_text = font.render("Level : " + level, True, (0,0,0))  # Màu đỏ
-    screen.blit(level_text, (x+75, y))  # Vẽ cấp độ lên màn hình
+    screen.blit(level_text, (x+45, y))  # Vẽ cấp độ lên màn hình
 
 # Hàm vẽ màn hình chọn cấp độ
 def draw_select_level():
@@ -203,16 +219,26 @@ def enemy(x, y, i, frame_count):
     else:
         screen.blit(enemy_walk[(frame_count // 20) % len(enemy_walk)], (x, y))  # Hiển thị hình ảnh kẻ thù đang đi
 
-# Function to draw boss
+# Hàm vẽ boss
 def draw_boss(x, y, frame_count):
     screen.blit(boss_idle[(frame_count // 20) % len(boss_idle)], (x, y))  # Hiển thị hoạt ảnh idle
-
-# Hàm kiểm tra va chạm giữa đạn và boss
+    
+# Hàm xử lý va chạm với boss
 def isCollisionBoss(bossX, bossY, bulletX, bulletY):
-    distance = math.sqrt(math.pow(bossX - bulletX, 2) + math.pow(bossY - bulletY, 2))
-    if distance < 40:  # Nếu khoảng cách giữa đạn và boss nhỏ hơn 40, coi như có va chạm
+    bullet_width = 30  # Chiều rộng của đạn
+    bullet_height = 20  # Chiều cao của đạn
+    boss_width = 128  # Chiều rộng của boss
+    boss_height = 128  # Chiều cao của boss
+
+    # Tính bán kính của boss
+    boss_radius = boss_width / 2
+
+    # Kiểm tra xem có va chạm không
+    if (bulletX + bullet_width > bossX - boss_radius and bulletX < bossX + boss_radius and
+        bulletY + bullet_height > bossY - boss_radius and bulletY < bossY + boss_radius):
         return True
     return False
+
 
 # Hàm bắn đạn
 def fire_bullet(x, y):
@@ -262,10 +288,10 @@ def reset_game():
         enemyX_change = [1.5 for _ in range(num_of_enemies)]  # Tốc độ chậm hơn
     elif level == "Medium":
         num_of_enemies = 7
-        enemyX_change = [2.5 for _ in range(num_of_enemies)]  # Tốc độ vừa
+        enemyX_change = [2.0 for _ in range(num_of_enemies)]  # Tốc độ vừa
     elif level == "Hard":
         num_of_enemies = 9
-        enemyX_change = [3.5 for _ in range(num_of_enemies)]  # Tốc độ nhanh hơn 
+        enemyX_change = [2.5 for _ in range(num_of_enemies)]  # Tốc độ nhanh hơn 
         
     # Đặt lại vị trí và trạng thái của kẻ thù
     enemyX = [random.randint(0, 50) for _ in range(num_of_enemies)]
@@ -283,13 +309,15 @@ game_over_time = None
 while running:
     screen.fill((0, 0, 0))  # Làm mới màn hình
     frame_count += 1  # Tăng số lượng khung hình
-
+    
     if menu:
         draw_menu()  # Vẽ menu
     elif select_level:
         draw_select_level()  # Vẽ màn hình chọn cấp độ
     else:
-        screen.blit(game_background, (0, 0))  # Vẽ nền game
+        # Kiểm tra cấp độ và thay đổi background
+        draw_background(level)
+        
         show_score(textX, testY)  # Hiển thị điểm số
         show_lives(textX, testY + 40, player_lives)  # Hiển thị mạng
         show_level(650, 17)  # Hiển thị cấp độ ở góc phải trên
@@ -299,7 +327,7 @@ while running:
             if pygame.time.get_ticks() - game_over_time >= 2000:  # Đợi 2 giây trước khi quay lại menu
                 menu = True  
                 game_over = False  
-            pygame.display.update()
+            pygame.display.update()  # Cập nhật màn hình
             continue   # Tiếp tục vòng lặp nếu game over
 
         player(playerX, playerY)  # Vẽ người chơi
@@ -317,6 +345,12 @@ while running:
                 player_lives -= 1  # Mất 1 mạng mỗi khi zombie vượt qua
 
             enemy(enemyX[i], enemyY[i], i, frame_count)  # Vẽ kẻ thù
+        
+        bossX += boss_speed  # Di chuyển boss từ trái sang phải
+        if bossX > 836:  # Nếu boss vượt qua màn hình, đưa boss trở lại
+            bossX = random.randint(100, 200)
+            bossY = random.randint(50, 550)
+
 
         # Nếu hết mạng thì trò chơi kết thúc
         if player_lives <= 0:
@@ -346,12 +380,17 @@ while running:
                     break  # Ngừng kiểm tra sau khi trúng zombie
         
         # Kiểm tra nếu boss đã xuất hiện
-        if score_value >= 35 and not boss_active:
+        if score_value >= 30 and not boss_active:
             boss_active = True  # Boss sẽ xuất hiện khi đạt đủ điểm số
+            boss_health = 10 
+            bossX = 0  # Vị trí cố định cho Boss (giữ Boss ở vị trí này khi xuất hiện)
+            bossY = 236  # Vị trí cố định của Boss theo chiều dọc
+            boss_speed = 0.5  # Tốc độ di chuyển của Boss
 
         # Vẽ boss nếu boss active
         if boss_active:
             draw_boss(bossX, bossY, frame_count)  # Vẽ boss
+            bossX += boss_speed  # Boss di chuyển từ trái qua phải
 
             # Kiểm tra va chạm giữa đạn và boss
             if bullet_state == "fire":
@@ -362,16 +401,32 @@ while running:
                     bullet_state = "ready"  # Đặt lại trạng thái đạn
                     laser_sound.play()  # Phát âm thanh súng
 
-            # Nếu số lần đạn trúng đủ 15, boss sẽ chết
-            if bullet_hit_count >= 15:
+            # Nếu số lần đạn trúng đủ 10, boss sẽ chết
+            if bullet_hit_count >= 10:
                 boss_active = False  # Tắt trạng thái boss
                 bullet_hit_count = 0  # Reset số lần đạn trúng
                 score_value += 10  # Cộng điểm khi boss bị tiêu diệt 
                 
+                for i in range(num_of_enemies):
+                    enemy_state[i] = "removed"
+                    
+                screen.fill((0,0,0))
+                draw_background(level)
+                pygame.display.update()
+                
+                game_over_text = over_font.render("You Win", True, (0, 0, 0))  # Thông báo thắng
+                screen.blit(game_over_text, (300, 250))  # Hiển thị thông báo thắng
+                pygame.display.update()
+                pygame.time.wait(2000)  # Chờ 2 giây trước khi quay lại menu
+                menu = True  # Quay lại menu
+
+        # Cập nhật màn hình sau khi vẽ tất cả các đối tượng
+        pygame.display.update()  # Cập nhật màn hình
+
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:  # Kiểm tra nếu người dùng đóng cửa sổ
             running = False
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN:   # Kiểm tra nếu có phím được nhấn
             if event.key == pygame.K_LEFT:
                 playerX_change = -5  # Di chuyển sang trái
             if event.key == pygame.K_RIGHT:
@@ -380,9 +435,9 @@ while running:
                 playerY_change = -5  # Di chuyển lên
             if event.key == pygame.K_DOWN:
                 playerY_change = 5  # Di chuyển xuống
-            if event.key == pygame.K_SPACE and bullet_state == "ready":
-                bulletX = playerX  
-                bulletY = playerY
+            if event.key == pygame.K_SPACE and bullet_state == "ready":    # Kiểm tra nếu nhấn phím space và đạn đang ở trạng thái "ready"
+                bulletX = playerX     # Đặt vị trí X của đạn bằng vị trí người chơi
+                bulletY = playerY       # Đặt vị trí Y của đạn bằng vị trí người chơi
                 fire_bullet(bulletX, bulletY)
                 laser_sound.play()  # Phát âm thanh khi bắn
 
