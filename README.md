@@ -1,107 +1,45 @@
-Soldier vs Zombie (SvZ)
+Soldier vs Zombie
+Trò chơi "Soldier vs Zombie" là một game hành động nơi người chơi vào vai một người lính chiến đấu chống lại đội quân zombie. Người chơi có thể di chuyển, bắn súng để tiêu diệt zombie và tránh các mối nguy hiểm từ chúng. Game có nhiều cấp độ và hệ thống điểm số để thử thách người chơi.
 
-Mô tả:
-"Soldier vs Zombie" là một trò chơi bắn súng 2D nơi bạn hóa thân thành người lính chiến đấu chống lại đội quân zombie đang tràn ngập. Nhiệm vụ của bạn là tiêu diệt kẻ thù, bảo vệ bản thân và đạt điểm số cao nhất.
+Yêu cầu hệ thống
+Python 3.x
+Pygame (Có thể cài đặt bằng lệnh pip install pygame)
+Hướng dẫn cài đặt
+Cài đặt Python và Pygame:
 
-Tính năng chính
-
-Chọn cấp độ chơi: Easy, Medium, Hard.
-
-Nhiều loại kẻ thù: Zombie thường và boss với hành vi di chuyển, tấn công, và chết.
-
-Tương tác hấp dẫn: Hệ thống bắn đạn, tính điểm, số mạng sống.
-
-Giao diện đẹp: Hình nền, âm thanh và đồ họa bắt mắt.
-
-
-Cài đặt
-
-1. Yêu cầu hệ thống
-
-Python: 3.7 hoặc mới hơn.
-
-Pygame: Thư viện đồ họa Python.
-
-
-2. Cài đặt thư viện cần thiết
-
-Chạy lệnh sau để cài đặt pygame nếu chưa có:
-
+Tải và cài đặt Python từ python.org
+Cài đặt Pygame bằng lệnh:
+bash
+Sao chép mã
 pip install pygame
+Tải mã nguồn của game về và giải nén vào thư mục bạn muốn.
 
-3. Cấu trúc thư mục
+Đảm bảo rằng thư mục chứa game có đầy đủ các tệp hình ảnh và âm thanh cần thiết trong thư mục assets/images và assets/sounds.
 
-Tạo cấu trúc thư mục như sau:
+Cách chơi
+Điều khiển:
 
-project/
-├── assets/
-│   ├── images/
-│   │   ├── menu_background.jpg
-│   │   ├── background.jpg
-│   │   ├── background_easy.jpg
-│   │   ├── background_medium.png
-│   │   ├── background_hard.jpg
-│   │   ├── start_button.png
-│   │   ├── shop_button.png
-│   │   ├── setting_button.png
-│   │   ├── quit_button.png
-│   │   ├── life.png
-│   │   ├── player.png
-│   │   ├── base_image.png
-│   │   ├── bullet.png
-│   │   ├── idle/
-│   │   ├── walk/
-│   │   ├── attack/
-│   │   ├── dead/
-│   │   ├── boss_idle/
-│   │   └── logo.jpg
-│   └── sounds/
-│       ├── background.wav
-│       └── laser.wav
-└── main.py
+Người chơi có thể di chuyển lên, xuống, trái, phải bằng các phím mũi tên.
+Bấm phím "Space" để bắn đạn.
+Mỗi khi bắn trúng zombie, điểm số của bạn sẽ tăng lên.
+Tránh để zombie vượt qua bạn, nếu không bạn sẽ mất mạng.
+Mục tiêu:
 
-4. Chạy trò chơi
+Tiêu diệt các zombie để đạt được điểm cao.
+Boss sẽ xuất hiện khi bạn đạt đủ điểm số yêu cầu. Hãy tiêu diệt boss để giành chiến thắng!
+Các tính năng chính
+Chọn cấp độ: Trò chơi có ba cấp độ: Dễ, Trung Bình, và Khó. Cấp độ càng cao, kẻ thù càng mạnh và nhanh.
+Hệ thống điểm số: Cộng điểm khi tiêu diệt zombie. Điểm số sẽ được hiển thị trên màn hình.
+Mạng sống: Người chơi có 5 mạng sống. Mất mạng khi zombie vượt qua người chơi.
+Boss: Mỗi khi bạn đạt đủ điểm, một con boss mạnh sẽ xuất hiện. Hãy bắn trúng boss để đánh bại nó và giành chiến thắng.
+Âm thanh: Nhạc nền và âm thanh bắn súng sẽ được phát trong quá trình chơi.
+Cách chơi
+Menu chính: Bạn sẽ bắt đầu tại menu chính nơi bạn có thể chọn "Bắt đầu", "Cài đặt" hoặc "Thoát".
+Chọn cấp độ: Sau khi bắt đầu game, bạn sẽ chọn cấp độ (Dễ, Trung Bình, hoặc Khó).
+Gameplay: Trong game, bạn sẽ phải đối đầu với các zombie đang di chuyển. Bắn zombie để ghi điểm và tránh bị chúng vượt qua.
+Kết thúc game: Khi bạn hết mạng sống hoặc khi bạn đánh bại boss, trò chơi sẽ kết thúc.
+Hình ảnh và âm thanh
+Tất cả hình ảnh và âm thanh trong trò chơi được lưu trữ trong thư mục assets/images và assets/sounds. Bạn có thể thay thế các tệp này để tùy chỉnh game của mình.
 
-Trong thư mục chứa file main.py, chạy lệnh:
-
-python main.py
-
-Hướng dẫn chơi
-
-1. Bắt đầu trò chơi
-
-Khởi động game và vào menu chính.
-
-Chọn "Start" để bắt đầu.
-
-
-2. Cách điều khiển
-
-Phím mũi tên: Di chuyển nhân vật.
-
-Phím Space: Bắn đạn tiêu diệt zombie.
-
-
-3. Mục tiêu
-
-Ngăn không để zombie vượt qua màn hình.
-
-Giữ mạng sống của nhân vật, tiêu diệt càng nhiều zombie càng tốt.
-
-Đối mặt và đánh bại boss khi xuất hiện.
-
-
-4. Cấp độ
-
-Easy: Zombie di chuyển chậm, ít zombie.
-
-Medium: Zombie nhanh hơn, số lượng tăng.
-
-Hard: Zombie đông, tốc độ di chuyển rất nhanh.
-
-
-Đóng góp
-
-Nếu bạn có ý tưởng hoặc đóng góp, hãy liên hệ qua email hoặc tạo pull request trên GitHub.
-
-Chúc bạn chơi game vui vẻ!
+Cảm ơn
+Cảm ơn bạn đã chơi "Soldier vs Zombie". Hy vọng bạn sẽ có những phút giây giải trí thú vị!
